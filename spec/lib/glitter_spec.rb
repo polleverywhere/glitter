@@ -1,36 +1,33 @@
 require 'spec_helper'
 require 'rexml/document'
 
-describe Glitter::Release do
+describe Glitter::App do
   before(:all) do
-    @release = Glitter::Release.new Glitter::Configuration.configure {
+    @app = Glitter::App.configure do
       name          "My App"
       version       "1.0.0"
       archive       "lib/glitter.rb"
-      release_notes "http://myapp.com/release_notes/"
-
+      
       s3 {
-        bucket            "my_app"
+        bucket_name       "my_app"
         access_key        "access"
         secret_access_key "sekret"
       }
-    }
+    end
+
+    # Leave this in this order to test sorting.    
+    @app.releases["3.0"].notes = "I'm the newest and greatest of them all. 3.0 I am!"
+    @app.releases["1.0"].notes = "Hi dude, 1.0"
+    @app.releases["2.0"].notes = "I'm way better than 2.0"
   end
 
-  it "should have name" do
-    @release.name.should eql("My App 1.0.0")
+  it "should have head" do
+    @app.head.version.should eql("1.0.0")
   end
 
-  it "should generate rss entry" do
-    REXML::Document.new(@release.to_rss).root.attributes["sparkle"].should eql('http://www.andymatuschak.org/xml-namespaces/sparkle')
+  it "should generate rss" do
+    REXML::Document.new(@app.appcast.rss).root.attributes["sparkle"].should eql('http://www.andymatuschak.org/xml-namespaces/sparkle')
   end
-
-  it "should have object_name" do
-    @release.object_name.should eql("my-app-1.0.0.rb")
-  end
-end
-
-describe Glitter::Configuration do
 
   shared_examples_for "configuration" do
     it "should read name" do
@@ -44,14 +41,10 @@ describe Glitter::Configuration do
     it "should read archive" do
       @config.archive.should eql("my_app.zip")
     end
-
-    it "should read release notes" do
-      @config.release_notes.should eql("http://myapp.com/release_notes/")
-    end
-
+    
     context "s3" do
-      it "should read bucket" do
-        @config.s3.bucket.should eql("my_app")
+      it "should read bucket_name" do
+        @config.s3.bucket_name.should eql("my_app")
       end
 
       it "should read access_key" do
@@ -64,20 +57,19 @@ describe Glitter::Configuration do
     end
 
     it "should have a valid Glitterfile template path" do
-      File.exists?(Glitter::Configuration::TemplatePath).should be_true
+      File.exists?(Glitter::App::TemplatePath).should be_true
     end
   end
-
+  
   context "block configuration" do
     before(:all) do
-      @config = Glitter::Configuration.configure do
+      @config = Glitter::App.configure do
         name          "My App"
         version       "1.0.0"
         archive       "my_app.zip"
-        release_notes "http://myapp.com/release_notes/"
 
         s3 {
-          bucket            "my_app"
+          bucket_name       "my_app"
           access_key        "access"
           secret_access_key "sekret"
         }
@@ -89,7 +81,7 @@ describe Glitter::Configuration do
 
   context "file configuration" do
     before(:all) do
-      @config = Glitter::Configuration.configure File.expand_path('../../../lib/glitter/templates/Glitterfile', __FILE__)
+      @config = Glitter::App.configure File.expand_path('../../../lib/glitter/templates/Glitterfile', __FILE__)
     end
     
     it_should_behave_like "configuration"

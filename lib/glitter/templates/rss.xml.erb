@@ -1,0 +1,21 @@
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+<channel>
+<title><%= app.name %></title>
+<link><%= app.appcast.url %></link>
+<description>Software updates for <%= app.name %></description>
+<language>en</language>
+<% app.releases.each do |version, release| %>
+<item>
+  <title>Version <%= version %></title>
+  <description>
+    <![CDATA[
+      <h2>New Features</h2>
+      <p><%= release.notes %></p>
+    ]]>
+  </description>
+  <pubDate><%= release.published_at.strftime("%a, %d %b %Y %H:%M:%S %z") %></pubDate>
+  <enclosure url="<%= release.url %>" sparkle:version="2.0" length="<%= release.file.stat.size %>" type="application/octet-stream" />
+</item>
+<% end %>
+</channel>
+</rss>

@@ -17,14 +17,12 @@ It should also be noted that Glitter uses HTTPS S3 URLs to eliminate the need fo
 3.  Edit the Glitterfile
 
         # After you configure this file, deploy your app with `glitter push`
-        
         name          "My App"
-        version       "1.0.0"
+        version       "1.0.0" # Don't forget, its ruby! This could read a version from a plist file
         archive       "my_app.zip"
-        release_notes "http://myapp.com/release_notes/"
         
         s3 {
-          bucket            "my_app"
+          bucket_name       "my_app"
           access_key        "access"
           secret_access_key "sekret"
         }

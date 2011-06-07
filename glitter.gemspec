@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.description = %q{Glitter makes it easy to publish software updates via the Sparkle framework by using S3 buckets.}
 
   s.rubyforge_project = "glitter"
-  s.add_dependency "aws-s3"
+  s.add_dependency "s3"
   s.add_dependency "haml"
   s.add_dependency "thor"
   

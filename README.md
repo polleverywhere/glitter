@@ -8,11 +8,11 @@ It should also be noted that Glitter uses HTTPS S3 URLs to eliminate the need fo
 
 1.  Install the gem
 
-        gem install glitter
+        $ gem install glitter
 
 2.  Generate a Glitterfile in your project directory
 
-        glitter init .
+        $ glitter init .
 
 3.  Edit the Glitterfile
 
@@ -29,7 +29,11 @@ It should also be noted that Glitter uses HTTPS S3 URLs to eliminate the need fo
 
 4. Publish your app to the web
 
-        glitter push
+        $ glitter push -m 'Added some really cool stuff to the mix!'
+        Pushing app my-app-1.0.0.zip
+        App pushed to https://s3.amazonaws.com/my_app/my-app-1.0.0.zip
+        Updated https://s3.amazonaws.com/my_app/appcast.xml
+
 
 That's it!
 

@@ -59,7 +59,7 @@ module Glitter
       end
 
       def service
-        @service ||= ::S3::Service.new(:access_key_id => access_key, :secret_access_key => secret_access_key)
+        @service ||= ::S3::Service.new(:access_key_id => access_key, :secret_access_key => secret_access_key, :use_ssl => true)
       end
 
       def bucket
@@ -164,12 +164,14 @@ module Glitter
       end
     end
 
-    desc "push RELEASE_NOTES", "pushes a build to S3 with release notes."
-    def push(release_notes)
-      puts "Pushing #{app.head.object_name} to bucket #{app.s3.bucket_name}..."
+    desc "push", "pushes a build to S3 with release notes."
+    method_option :release_notes, :type => :string, :aliases => "-m"
+    def push
+      puts "Pushing app #{app.head.object_name}"
+      app.head.notes = options[:release_notes]
       app.head.push
-      app.appcast.push
       puts "App pushed to #{app.head.url}"
+      puts "Updated #{app.appcast.url}"
     end
 
   private

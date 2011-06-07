@@ -41,7 +41,7 @@ describe Glitter::App do
     it "should read archive" do
       @config.archive.should eql("my_app.zip")
     end
-
+    
     context "s3" do
       it "should read bucket_name" do
         @config.s3.bucket_name.should eql("my_app")

@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'bundler/setup'
+require File.expand_path('../../lib/glitter', __FILE__)
+
+Glitter::CLI.start

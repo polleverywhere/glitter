@@ -1,0 +1,11 @@
+# After you configure this file, deploy your app with `glitter push`
+name          "My App"
+version       "1.0.0"
+archive       "my_app.zip"
+release_notes "http://myapp.com/release_notes/"
+
+s3 {
+  bucket            "my_app"
+  access_key        "access"
+  secret_access_key "sekret"
+}

@@ -1,0 +1,5 @@
+require 'rubygems'
+require 'bundler/setup'
+require 'rspec'
+require 'ruby-debug'
+require 'glitter'

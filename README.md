@@ -35,6 +35,16 @@ It should also be noted that Glitter uses HTTPS S3 URLs to eliminate the need fo
         Updated head https://s3.amazonaws.com/my_app/my-app-head.zip to https://s3.amazonaws.com/my_app/my-app-1.0.0.zip
         Updated https://s3.amazonaws.com/my_app/appcast.xml
 
+5.  Distribute the link to your app
+
+    https://s3.amazonaws.com/my_app/my-app-head.zip is the "current" version of your application and a history is maintained with https://s3.amazonaws.com/my_app/my-app-1.0.0.zip assets. You'll probably want to link to the "head" asset of your app and keep the older builds around for troubleshooting purposes.
+    
+    If you want a vanity URL to distribte your app, setup a redirect like this in nginx:
+    
+        rewrite ^/my-app.zip$ https://s3.amazonaws.com/my_app/my-app-head.zip;
+    
+    Now send your users to mydomain.com/my-app.zip and they'll get the latest version of your app. I don't recommend using a CNAME with your application because it won't work with Amazon's HTTPS servers and you'll have to jump through some hoops to sign your app distributions with a DSA signature. Not worth it in my opinion.
+
 That's it!
 
 # License

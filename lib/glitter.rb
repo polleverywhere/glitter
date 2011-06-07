@@ -170,6 +170,7 @@ module Glitter
       puts "Pushing app #{app.head.object_name}"
       app.head.notes = options[:release_notes]
       app.head.push
+      app.appcast.push
       puts "App pushed to #{app.head.url}"
       puts "Updated #{app.appcast.url}"
     end

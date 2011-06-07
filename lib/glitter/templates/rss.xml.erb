@@ -4,17 +4,17 @@
 <link><%= app.appcast.url %></link>
 <description>Software updates for <%= app.name %></description>
 <language>en</language>
-<% app.releases.each do |version, release| %>
+<% app.assets.each do |version, asset| %>
 <item>
   <title>Version <%= version %></title>
   <description>
     <![CDATA[
       <h2>New Features</h2>
-      <p><%= release.notes %></p>
+      <p><%= asset.notes %></p>
     ]]>
   </description>
-  <pubDate><%= release.published_at.strftime("%a, %d %b %Y %H:%M:%S %z") %></pubDate>
-  <enclosure url="<%= release.url %>" sparkle:version="2.0" length="<%= release.file.stat.size %>" type="application/octet-stream" />
+  <pubDate><%= asset.published_at.strftime("%a, %d %b %Y %H:%M:%S %z") %></pubDate>
+  <enclosure url="<%= asset.url %>" sparkle:version="2.0" length="<%= asset.file.stat.size %>" type="application/octet-stream" />
 </item>
 <% end %>
 </channel>

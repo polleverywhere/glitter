@@ -16,13 +16,17 @@ describe Glitter::App do
     end
 
     # Leave this in this order to test sorting.    
-    @app.releases["3.0"].notes = "I'm the newest and greatest of them all. 3.0 I am!"
-    @app.releases["1.0"].notes = "Hi dude, 1.0"
-    @app.releases["2.0"].notes = "I'm way better than 2.0"
+    @app.assets["3.0"].notes = "I'm the newest and greatest of them all. 3.0 I am!"
+    @app.assets["1.0"].notes = "Hi dude, 1.0"
+    @app.assets["2.0"].notes = "I'm way better than 2.0"
+  end
+
+  it "should have latest" do
+    @app.latest.version.should eql("1.0.0")
   end
 
   it "should have head" do
-    @app.head.version.should eql("1.0.0")
+    @app.latest.should respond_to(:head)
   end
 
   it "should generate rss" do

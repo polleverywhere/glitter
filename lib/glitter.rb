@@ -103,13 +103,13 @@ module Glitter
       @appcast ||= Appcast.new(self)
     end
 
-    def head
-      releases[version]
+    def latest
+      assets[version]
     end
 
-    def releases
-      @releases ||= Hash.new do |hash,key|
-        hash[key] = Release.new do |r|
+    def assets
+      @assets ||= Hash.new do |hash,key|
+        hash[key] = Asset.new do |r|
           r.version = key
           r.app = self
         end
@@ -117,9 +117,8 @@ module Glitter
     end
   end
 
-  class Release
-    attr_accessor :app, :version, :notes, :published_at
-    attr_reader :object
+  class Asset
+    attr_accessor :app, :version, :notes, :published_at, :object
 
     def initialize
       @published_at = Time.now
@@ -145,6 +144,17 @@ module Glitter
     def push
       object.content = file
       object.save
+      self
+    end
+
+    # Sets this asset as the head on the S3 bucket
+    def head
+      @head ||= self.class.new do |a|
+        a.app = app
+        a.version = "head"
+        a.published_at = published_at
+        a.object = object.copy(:key => a.object_name)
+      end
     end
 
     def file
@@ -167,11 +177,15 @@ module Glitter
     desc "push", "pushes a build to S3 with release notes."
     method_option :release_notes, :type => :string, :aliases => "-m"
     def push
-      puts "Pushing app #{app.head.object_name}"
-      app.head.notes = options[:release_notes]
-      app.head.push
-      app.appcast.push
-      puts "App pushed to #{app.head.url}"
+      puts "Pushing app #{app.latest.object_name}"
+
+      app.latest.notes = options[:release_notes]
+      app.latest.push
+      puts "Asset pushed to #{app.latest.url}"
+
+      app.latest.head
+      puts "Updated head #{app.latest.head.url} to #{app.latest.url}"
+
       puts "Updated #{app.appcast.url}"
     end
 

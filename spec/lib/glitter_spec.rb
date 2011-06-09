@@ -25,6 +25,7 @@ describe Glitter::App do
     @app.latest.version.should eql("1.0.0")
   end
 
+  # TODO this should be speced out better using moching.
   it "should have head" do
     @app.latest.should respond_to(:head)
   end

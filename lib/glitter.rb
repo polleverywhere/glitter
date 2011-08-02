@@ -48,7 +48,7 @@ module Glitter
     AppcastXml = 'appcast.xml'
 
     include Configurable
-    attr_configurable :name, :version, :archive, :s3
+    attr_configurable :name, :version, :notes, :archive, :s3
 
     class S3
       include Configurable
@@ -179,7 +179,7 @@ module Glitter
     def push
       puts "Pushing app #{app.latest.object_name}"
       # Push the latest release with release notes
-      app.latest.notes = options[:release_notes]
+      app.latest.notes = options[:release_notes] if options[:release_notes].present?
       app.latest.push
       puts "Asset pushed to #{app.latest.url}"
       app.latest.head # Sets this release as the head.

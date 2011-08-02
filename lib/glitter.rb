@@ -111,6 +111,7 @@ module Glitter
       @assets ||= Hash.new do |hash,key|
         hash[key] = Asset.new do |r|
           r.version = key
+          r.notes = notes
           r.app = self
         end
       end
@@ -152,6 +153,7 @@ module Glitter
       @head ||= self.class.new do |a|
         a.app = app
         a.version = "head"
+        a.notes = app.notes
         a.published_at = published_at
         a.object = object.copy(:key => a.object_name)
       end
@@ -179,7 +181,9 @@ module Glitter
     def push
       puts "Pushing app #{app.latest.object_name}"
       # Push the latest release with release notes
-      app.latest.notes = options[:release_notes] if options[:release_notes]
+      puts "Notes are the following"
+      puts app.notes
+      #app.latest.notes = options[:release_notes] if options[:release_notes]
       app.latest.push
       puts "Asset pushed to #{app.latest.url}"
       app.latest.head # Sets this release as the head.

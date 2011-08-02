@@ -46,6 +46,10 @@ describe Glitter::App do
     it "should read archive" do
       @config.archive.should eql("my_app.zip")
     end
+
+    it "should read notes" do
+      @config.notes.should eql("notes go here")
+    end
     
     context "s3" do
       it "should read bucket_name" do
@@ -72,6 +76,7 @@ describe Glitter::App do
         name          "My App"
         version       "1.0.0"
         archive       "my_app.zip"
+        notes         "notes go here"
 
         s3 {
           bucket_name       "my_app"

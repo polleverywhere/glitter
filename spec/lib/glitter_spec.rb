@@ -6,6 +6,7 @@ describe Glitter::App do
     @app = Glitter::App.configure do
       name          "My App"
       version       "1.0.0"
+      shortVersionString "1.0"
       archive       "lib/glitter.rb"
       
       s3 {
@@ -43,6 +44,10 @@ describe Glitter::App do
       @config.version.should eql("1.0.0")
     end
 
+    it "should read shortVersionString" do
+      @config.shortVersionString.should eql("1.0")
+    end
+
     it "should read archive" do
       @config.archive.should eql("my_app.zip")
     end
@@ -75,6 +80,7 @@ describe Glitter::App do
       @config = Glitter::App.configure do
         name          "My App"
         version       "1.0.0"
+        shortVersionString  "1.0"
         archive       "my_app.zip"
         notes         "notes go here"
 

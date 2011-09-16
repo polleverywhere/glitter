@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
   s.name        = "glitter"
   s.version     = Glitter::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Brad Gessler"]
-  s.email       = ["brad@polleverywhere.com"]
+  s.authors     = ["Brad Gessler, Thomas Hanley"]
+  s.email       = ["brad@polleverywhere.com, tom@lytro.com"]
   s.homepage    = "https://github.com/polleverywhere/glitter"
   s.summary     = %q{Publish Mac software updates with the Sparkle framework and Amazon S3.}
   s.description = %q{Glitter makes it easy to publish software updates via the Sparkle framework by using S3 buckets.}

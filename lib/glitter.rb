@@ -52,10 +52,14 @@ module Glitter
 
     class S3
       include Configurable
-      attr_configurable :bucket_name, :access_key, :secret_access_key
+      attr_configurable :bucket_name, :access_key, :secret_access_key, :subdomain_bucket
 
       def url_for(path)
-        "https://s3.amazonaws.com/#{bucket_name}/#{path}"
+        if subdomain_bucket
+          "https://#{bucket_name}.s3.amazonaws.com/#{path}"
+        else
+          "https://s3.amazonaws.com/#{bucket_name}/#{path}"
+        end
       end
 
       def service

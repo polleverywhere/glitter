@@ -25,6 +25,8 @@ It should also be noted that Glitter uses HTTPS S3 URLs to eliminate the need fo
           bucket_name       "my_app"
           access_key        "access"
           secret_access_key "sekret"
+          # Set this to true to use an EU style bucket which uses a subdomain
+          # subdomain_bucket  true
         }
 
 4. Publish your app to the web

@@ -2,6 +2,7 @@
 name          "My App"
 version       "1.0.0"
 shortVersionString "1.0"
+releaseNotesLink "https://raw.github.com/polleverywhere/glitter/master/README.md"
 archive       "my_app.zip"
 notes         "notes go here"
 

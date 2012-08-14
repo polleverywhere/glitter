@@ -7,6 +7,7 @@ describe Glitter::App do
       name          "My App"
       version       "1.0.0"
       shortVersionString "1.0"
+      releaseNotesLink "https://www.github.com"
       archive       "lib/glitter.rb"
       
       s3 {
@@ -46,6 +47,10 @@ describe Glitter::App do
 
     it "should read shortVersionString" do
       @config.shortVersionString.should eql("1.0")
+    end
+
+    it "should read releaseNotesLink" do
+      @config.releaseNotesLink.should eql("https://www.github.com")
     end
 
     it "should read archive" do

@@ -15,6 +15,7 @@
   </description>
   <pubDate><%= asset.published_at.strftime("%a, %d %b %Y %H:%M:%S %z") %></pubDate>
   <enclosure url="<%= asset.url %>" sparkle:version="<%= version %>" sparkle:shortVersionString="<%= asset.shortVersionString %>" length="<%= asset.file.stat.size %>" type="application/octet-stream" />
+  <sparkle:releaseNotesLink><%= asset.releaseNotesLink %></sparkle:releaseNotesLink>
 </item>
 <% end %>
 </channel>

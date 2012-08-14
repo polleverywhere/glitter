@@ -48,7 +48,7 @@ module Glitter
     AppcastXml = 'appcast.xml'
 
     include Configurable
-    attr_configurable :name, :version, :shortVersionString, :notes, :archive, :s3
+    attr_configurable :name, :version, :shortVersionString, :releaseNotesLink, :notes, :archive, :s3
 
     class S3
       include Configurable
@@ -112,6 +112,7 @@ module Glitter
         hash[key] = Asset.new do |r|
           r.version = key
           r.shortVersionString = shortVersionString
+          r.releaseNotesLink = releaseNotesLink
           r.notes = notes
           r.app = self
         end
@@ -120,7 +121,7 @@ module Glitter
   end
 
   class Asset
-    attr_accessor :app, :version, :shortVersionString, :notes, :published_at, :object
+    attr_accessor :app, :version, :shortVersionString, :releaseNotesLink, :notes, :published_at, :object
 
     def initialize
       @published_at = Time.now
@@ -155,6 +156,7 @@ module Glitter
         a.app = app
         a.version = "head"
         a.shortVersionString = shortVersionString
+        a.releaseNotesLink = releaseNotesLink
         a.notes = app.notes
         a.published_at = published_at
         a.object = object.copy(:key => a.object_name)

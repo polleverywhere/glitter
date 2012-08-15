@@ -86,6 +86,7 @@ describe Glitter::App do
         name          "My App"
         version       "1.0.0"
         shortVersionString  "1.0"
+        releaseNotesLink  "https://www.github.com"
         archive       "my_app.zip"
         notes         "notes go here"
 

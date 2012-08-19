@@ -6,7 +6,7 @@
 <language>en</language>
 <% app.assets.each do |version, asset| %>
 <item>
-  <title>Version <%= asset.shortVersionString %></title>
+  <title>Version <%= asset.short_version_string %></title>
   <description>
     <![CDATA[
       <h2>New Features</h2>
@@ -14,7 +14,8 @@
     ]]>
   </description>
   <pubDate><%= asset.published_at.strftime("%a, %d %b %Y %H:%M:%S %z") %></pubDate>
-  <enclosure url="<%= asset.url %>" sparkle:version="<%= version %>" sparkle:shortVersionString="<%= asset.shortVersionString %>" length="<%= asset.file.stat.size %>" type="application/octet-stream" />
+  <enclosure url="<%= asset.url %>" sparkle:version="<%= version %>" sparkle:shortVersionString="<%= asset.short_version_string %>" length="<%= asset.file.stat.size %>" type="application/octet-stream" />
+  <sparkle:releaseNotesLink><%= asset.release_notes_link %></sparkle:releaseNotesLink>
 </item>
 <% end %>
 </channel>

@@ -6,7 +6,8 @@ describe Glitter::App do
     @app = Glitter::App.configure do
       name          "My App"
       version       "1.0.0"
-      shortVersionString "1.0"
+      short_version_string "1.0"
+      release_notes_link "http://www.google.com"
       archive       "lib/glitter.rb"
       
       s3 {
@@ -44,8 +45,12 @@ describe Glitter::App do
       @config.version.should eql("1.0.0")
     end
 
-    it "should read shortVersionString" do
-      @config.shortVersionString.should eql("1.0")
+    it "should read short_version_string" do
+      @config.short_version_string.should eql("1.0")
+    end
+
+    it "should read release_notes_link" do
+      @config.release_notes_link.should eql("http://www.google.com")
     end
 
     it "should read archive" do
@@ -80,7 +85,8 @@ describe Glitter::App do
       @config = Glitter::App.configure do
         name          "My App"
         version       "1.0.0"
-        shortVersionString  "1.0"
+        short_version_string  "1.0"
+        release_notes_link  "http://www.google.com"
         archive       "my_app.zip"
         notes         "notes go here"
 

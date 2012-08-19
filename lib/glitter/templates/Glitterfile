@@ -1,7 +1,8 @@
 # After you configure this file, deploy your app with `glitter push`
 name          "My App"
 version       "1.0.0"
-shortVersionString "1.0"
+short_version_string "1.0"
+release_notes_link "http://www.google.com"
 archive       "my_app.zip"
 notes         "notes go here"
 

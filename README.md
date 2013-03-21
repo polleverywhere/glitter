@@ -41,7 +41,7 @@ Glitter is an easy way to publish native application software updates to an Amaz
 Want to hack on glitter? Awesome! You'll need to setup an S3 bucket and run specs with the `GLITTER_URL` env var specified:
 
 ```sh
-$ GLITTER_URL=https://secret_access_key:access_key_id@s3.amazonaws.com/my-app-bucket bundle exec rspec
+$ GLITTER_URL="https://secret_access_key:access_key_id@s3.amazonaws.com/my-app-bucket" bundle exec rspec
 ```
 
 Prefer to use Foreman? Create a `.env` file in the root of the project, then paste:

@@ -18,8 +18,8 @@ Glitter is an easy way to publish native application software updates to an Amaz
     ```sh
     $ glitter push \
         -m 'Added some really cool stuff to the mix!' \
-        -v 1.2.5 -c "mac-edge" \
         -u "https://secret_access_key:access_key_id@s3.amazonaws.com/my-app-bucket" \
+        -v 1.2.5 -c "mac-edge" \
         my-app.dmg
 
     Pushing app my-app.dmg to https://s3.amazonaws.com/mac-edge/1.2.5/my-app.dmg
@@ -35,6 +35,22 @@ Glitter is an easy way to publish native application software updates to an Amaz
         rewrite ^/my-app.zip$ https://s3.amazonaws.com/mac-edge/my-app.dmg;
     
     Now send your users to mydomain.com/my-app.zip and they'll get the latest version of your app. I don't recommend using a CNAME with your application because it won't work with Amazon's HTTPS servers and you'll have to jump through some hoops to sign your app distributions with a DSA signature. Not worth it in my opinion.
+
+# Contribute
+
+Want to hack on glitter? Awesome! You'll need to setup an S3 bucket and run specs with the `GLITTER_URL` env var specified:
+
+```sh
+$ GLITTER_URL=https://secret_access_key:access_key_id@s3.amazonaws.com/my-app-bucket bundle exec rspec
+```
+
+Prefer to use Foreman? Create a `.env` file in the root of the project, then paste:
+
+```sh
+GLITTER_URL=https://secret_access_key:access_key_id@s3.amazonaws.com/my-app-bucket
+```
+
+and run specs via `foreman run bundle exec rspec`. Pretty sweet eh?
 
 That's it!
 

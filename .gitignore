@@ -4,3 +4,5 @@ bin/Glitterfile
 .bundle
 Gemfile.lock
 pkg/*
+tmp
+.env

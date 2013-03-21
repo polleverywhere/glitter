@@ -1,13 +1,13 @@
 # After you configure this file, deploy your app with `glitter push`
-name          "My App"
-version       "1.0.0"
-short_version_string "1.0"
-release_notes_link "http://www.google.com"
-archive       "my_app.zip"
-notes         "notes go here"
-
-s3 {
-  bucket_name       "my_app"
+server {
+  bucket_name       "app-distro-bucket"
   access_key        "access"
   secret_access_key "sekret"
+}
+
+app 'My Windows App' {
+  description "The hotest app that you've ever seen on your PC."
+  channel 'win-edge'
+  channel 'win-beta'
+  channel 'win'
 }

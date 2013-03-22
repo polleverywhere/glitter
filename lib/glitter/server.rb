@@ -5,10 +5,10 @@ require 'uri'
 # contain multiple releases of software.
 module Glitter
   class Server
-    attr_reader :url
+    attr_reader :access_key_id, :secret_access_key, :bucket_name
 
-    def initialize(url = ENV['GLITTER_URL'])
-      @url = URI.parse(url)
+    def initialize(access_key_id = ENV['GLITTER_ACCESS_KEY_ID'], secret_access_key = ENV['GLITTER_SECRET_ACCESS_KEY'], bucket_name = ENV['GLITTER_BUCKET_NAME'])
+      @access_key_id, @secret_access_key, @bucket_name = access_key_id, secret_access_key, bucket_name
     end
 
     def channel(name)
@@ -16,7 +16,7 @@ module Glitter
     end
 
     def bucket
-      @bucket ||= s3.buckets.find url.path.gsub(/^\//,'') # Strip leading slash from path.
+      @bucket ||= s3.buckets.find bucket_name
     end
 
     # Iterate through the objects in S3 and return a hash of channels containing their
@@ -28,14 +28,14 @@ module Glitter
         hash
       end
     end
-
+    
   private
     def channels
       Hash.new { |h,k| h[k] = Channel.new(k, self) }
     end
 
     def s3
-      @s3 ||= ::S3::Service.new(:access_key_id => url.user, :secret_access_key => url.password, :use_ssl => true)
+      @s3 ||= ::S3::Service.new(:access_key_id => access_key_id, :secret_access_key => secret_access_key, :use_ssl => true)
     end
   end
 end

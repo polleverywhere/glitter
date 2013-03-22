@@ -16,12 +16,12 @@ Glitter is an easy way to publish native application software updates to an Amaz
 2. Publish your app to the web.
 
     ```sh
-    $ glitter push \
-        -m 'Added some really cool stuff to the mix!' \
-        -u "https://secret_access_key:access_key_id@s3.amazonaws.com/my-app-bucket" \
-        -v 1.2.5 -c "mac-edge" \
-        my-app.dmg
-
+    $ GLITTER_ACCESS_KEY_ID=secret_access_key \
+        GLITTER_SECRET_ACCESS_KEY=access_key_id \
+        GLITTER_BUCKET_NAME=my-app-bucket \
+        glitter push my-app.dmg -v 1.2.5 -c "mac-edge" \
+        -m 'Added some really cool stuff to the mix!'
+    
     Pushing app my-app.dmg to https://s3.amazonaws.com/mac-edge/1.2.5/my-app.dmg
     Updated head https://s3.amazonaws.com/mac-edge/my-app.dmg to https://s3.amazonaws.com/mac-edge/1.2.5/my-app.dmg
     ```
@@ -41,18 +41,24 @@ Glitter is an easy way to publish native application software updates to an Amaz
 Want to hack on glitter? Awesome! You'll need to setup an S3 bucket and run specs with the `GLITTER_URL` env var specified:
 
 ```sh
-$ GLITTER_URL="https://secret_access_key:access_key_id@s3.amazonaws.com/my-app-bucket" bundle exec rspec
+$ GLITTER_ACCESS_KEY_ID=secret_access_key GLITTER_SECRET_ACCESS_KEY=access_key_id GLITTER_BUCKET_NAME=my-app-bucket bundle exec rspec
 ```
 
 Prefer to use Foreman? Create a `.env` file in the root of the project, then paste:
 
 ```sh
-GLITTER_URL=https://secret_access_key:access_key_id@s3.amazonaws.com/my-app-bucket
+GLITTER_ACCESS_KEY_ID=secret_access_key
+GLITTER_SECRET_ACCESS_KEY=access_key_id
+GLITTER_BUCKET_NAME=my-app-bucket
 ```
 
-and run specs via `foreman run bundle exec rspec`. Pretty sweet eh?
+and run specs via:
 
-That's it!
+```sh
+foreman run bundle exec rspec
+```
+
+Pretty sweet eh? That's it!
 
 # License
 

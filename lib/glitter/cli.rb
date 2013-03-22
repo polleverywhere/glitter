@@ -7,11 +7,9 @@ module Glitter
     method_option :notes, :type => :string, :aliases => "-m"
     method_option :version, :type => :string, :aliases => "-v"
     method_option :channel, :type => :string, :aliases => "-c"
-    method_option :url, :type => :string, :aliases => "-u"
-    #    "https://secret_access_key:access_key_id@aws.blah.com/bucket-name"
 
     def push(asset_path)
-      Server.new(options.url).channel(options.channel).release do |release|
+      Server.new.channel(options.channel).release do |release|
         release.notes   options.notes
         release.version options.version
         release.asset   File.open(asset_path)

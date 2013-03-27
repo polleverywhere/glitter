@@ -7,10 +7,9 @@ describe Glitter do
   end
 
   it "should release to channel" do
-    server.channel('test-channel').release do
-      version "1.1.2-#{rand}"
-      notes   %[Hey man, this is pretty awesome.]
-      asset   File.open(__FILE__)
+    Glitter::Release::Sparkle.new server.channel('test-channel'), "1.1.2-#{rand}" do |r|
+      r.notes = %[Hey man, this is pretty awesome.]
+      r.asset = File.open(__FILE__)
     end.push.head
   end
 end

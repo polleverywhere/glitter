@@ -9,11 +9,11 @@ module Glitter
     method_option :channel, :type => :string, :aliases => "-c"
 
     def push(asset_path)
-      Server.new.channel(options.channel).release do |release|
-        release.notes   options.notes
-        release.version options.version
-        release.asset   File.open(asset_path)
-      end.push.head
+      server = Server.new.channel(options.channel)
+      release = Release::Sparkle.new(server, options.version)
+      release.notes = options.notes
+      release.asset = File.open asset_path
+      release.push.head
     end
 
     # desc "yank", "remove a build from a release channel"

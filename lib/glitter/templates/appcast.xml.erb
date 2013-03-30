@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF–8" ?>
+<?xml version="1.0"?>
 <rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
   <channel>
     <title><%= channel.name %></title>
@@ -7,10 +7,10 @@
     <language>en</language>
     <item>
       <title>Version <%= version %></title>
+      <sparkle:releaseNotesLink><%= notes_asset.url %></sparkle:releaseNotesLink>
       <description>
         <![CDATA[
-          <h2>New Features</h2>
-          <p><%= notes %></p>
+          <%= notes %>
         ]]>
       </description>
       <pubDate><%= published_at.strftime("%a, %d %b %Y %H:%M:%S %z") %></pubDate>

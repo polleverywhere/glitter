@@ -74,7 +74,7 @@ module Glitter
 
       # Generate assets and push 
       def push
-        release_notes_asset
+        notes_asset
         appcast_asset
         executable_asset
         super
@@ -82,9 +82,9 @@ module Glitter
 
     private
       # Generates an HTML file of the release notes.
-      def release_notes_asset
-        assets['release_notes.html'].tap do |a|
-          a.content = render_template 'release_notes.html.erb'
+      def notes_asset
+        assets['notes.html'].tap do |a|
+          a.content = render_template 'notes.html.erb'
           a.content_type = 'text/html'
         end
       end

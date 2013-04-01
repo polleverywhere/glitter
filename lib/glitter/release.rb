@@ -37,7 +37,7 @@ module Glitter
         logger.info "Promoting version #{version} to HEAD"
         assets.map do |_, object|
           channel, _, key = Release.object_segments(object.key)
-          object = object.copy key: File.join(channel, key)
+          object = object.copy :key => File.join(channel, key)
           logger.info " Copying #{key} to #{object.url}"
           object.save
         end

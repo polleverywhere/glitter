@@ -18,9 +18,9 @@ Glitter also supports the concepts of release channels, which makes it possible 
 2. Publish your app to the web.
 
     ```sh
-    $ GLITTER_ACCESS_KEY_ID=secret_access_key \
-        GLITTER_SECRET_ACCESS_KEY=access_key_id \
-        GLITTER_BUCKET_NAME=my-app-bucket \
+    $ AWS_ACCESS_KEY_ID=secret_access_key \
+        AWS_SECRET_ACCESS_KEY=access_key_id \
+        AWS_BUCKET_NAME=my-app-bucket \
         glitter push my-app.dmg -v 1.2.5 -c "mac-edge" \
         -m 'Added some really cool stuff to the mix!'
     
@@ -40,18 +40,21 @@ Glitter also supports the concepts of release channels, which makes it possible 
 
 # Contribute
 
-Want to hack on glitter? Awesome! You'll need to setup an S3 bucket and run specs with the `GLITTER_URL` env var specified:
+Want to hack on glitter? Awesome! You'll need to setup an S3 bucket and run specs with the `AWS_URL` env var specified:
 
 ```sh
-$ GLITTER_ACCESS_KEY_ID=secret_access_key GLITTER_SECRET_ACCESS_KEY=access_key_id GLITTER_BUCKET_NAME=my-app-bucket bundle exec rspec
+$ AWS_ACCESS_KEY_ID=secret_access_key \
+    AWS_SECRET_ACCESS_KEY=access_key_id \
+    AWS_BUCKET_NAME=my-app-bucket \
+    bundle exec rspec
 ```
 
 Prefer to use Foreman? Create a `.env` file in the root of the project, then paste:
 
 ```sh
-GLITTER_ACCESS_KEY_ID=secret_access_key
-GLITTER_SECRET_ACCESS_KEY=access_key_id
-GLITTER_BUCKET_NAME=my-app-bucket
+AWS_ACCESS_KEY_ID=secret_access_key
+AWS_SECRET_ACCESS_KEY=access_key_id
+AWS_BUCKET_NAME=my-app-bucket
 ```
 
 and run specs via:

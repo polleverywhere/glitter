@@ -7,7 +7,7 @@ module Glitter
   class Server
     attr_reader :access_key_id, :secret_access_key, :bucket_name
 
-    def initialize(access_key_id = ENV['GLITTER_ACCESS_KEY_ID'], secret_access_key = ENV['GLITTER_SECRET_ACCESS_KEY'], bucket_name = ENV['GLITTER_BUCKET_NAME'])
+    def initialize(access_key_id = ENV['AWS_ACCESS_KEY_ID'], secret_access_key = ENV['AWS_SECRET_ACCESS_KEY'], bucket_name = ENV['AWS_BUCKET_NAME'])
       @access_key_id, @secret_access_key, @bucket_name = access_key_id, secret_access_key, bucket_name
     end
 

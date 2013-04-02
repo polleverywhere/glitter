@@ -16,6 +16,10 @@ module Glitter
       release.push.head
     end
 
+    desc "version", "print the version of glitter."
+    def version
+      puts Glitter::VERSION
+    end
     # desc "yank", "remove a build from a release channel"
     # method_option :version, :type => :string, :aliases => "-v"
     # method_option :channel, :type => :string, :aliases => "-c"

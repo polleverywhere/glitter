@@ -106,7 +106,7 @@ module Glitter
       end
 
       def executable_key
-        File.basename(executable)
+        File.basename(executable.path)
       end
 
       def render_template(path)

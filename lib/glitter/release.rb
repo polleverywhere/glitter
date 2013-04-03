@@ -21,8 +21,14 @@ module Glitter
       end
 
       # Push assets up to the S3 bucket path `/:channel/:version/*`.
-      def push
-        raise ExistingReleaseError.new("Existing build at version #{version}. Increment the version and push again.") if version_exists?
+      def push(opts={})
+        p opts
+        if !opts[:force] and version_exists?
+          raise ExistingReleaseError.new("Existing build at version #{version}. Increment the version and push again.")
+        end
+
+        logger.warn "Forced push" if opts[:force]
+
         logger.info "Pushing version #{version} to #{channel.name}"
         assets.each do |key, object|
           logger.info " PUT #{key} to #{object.url}"
@@ -73,11 +79,11 @@ module Glitter
       end
 
       # Generate assets and push 
-      def push
+      def push(*args)
         notes_asset
         appcast_asset
         executable_asset
-        super
+        super(*args)
       end
 
     private

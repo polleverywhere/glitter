@@ -22,7 +22,6 @@ module Glitter
 
       # Push assets up to the S3 bucket path `/:channel/:version/*`.
       def push(opts={})
-        p opts
         if !opts[:force] and version_exists?
           raise ExistingReleaseError.new("Existing build at version #{version}. Increment the version and push again.")
         end

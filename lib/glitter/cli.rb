@@ -9,7 +9,6 @@ module Glitter
     method_option :channel, :type => :string, :aliases => "-c"
     method_option :force, :type => :boolean, :aliases => "-f"
     def push(executable_path)
-      p options
       server = Server.new.channel(options.channel)
       release = Release::Sparkle.new(server, options.version)
       release.notes       = options.notes

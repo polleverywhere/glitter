@@ -28,7 +28,7 @@ module Glitter
         hash
       end
     end
-    
+
   private
     def channels
       Hash.new { |h,k| h[k] = Channel.new(k, self) }

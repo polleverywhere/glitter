@@ -66,7 +66,7 @@ module Glitter
       end
     end
 
-    # A release consists of a binary asset, notes, a monotonically increasing version number, and 
+    # A release consists of a binary asset, notes, a monotonically increasing version number, and
     # lives inside of a channel.
     class Sparkle < Base
       attr_accessor :notes, :executable, :filename
@@ -77,7 +77,7 @@ module Glitter
         @published_at ||= Time.now
       end
 
-      # Generate assets and push 
+      # Generate assets and push
       def push(*args)
         notes_asset
         appcast_asset

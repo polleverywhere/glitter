@@ -2,7 +2,7 @@
 <rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
   <channel>
     <title><%= channel.name %></title>
-    <link><%= executable_asset.url %></link>
+    <link><%= appcast_asset.url %></link>
     <description>Software updates for <%= channel.name %></description>
     <language>en</language>
     <item>
@@ -15,7 +15,6 @@
       </description>
       <pubDate><%= published_at.strftime("%a, %d %b %Y %H:%M:%S %z") %></pubDate>
       <enclosure url="<%= executable_asset.url %>" sparkle:version="<%= version %>" sparkle:shortVersionString="<%= version %>" length="<%= FileTest.size executable.path %>" type="application/octet-stream" />
-      <sparkle:releaseNotesLink><%= notes %></sparkle:releaseNotesLink>
     </item>
   </channel>
 </rss>

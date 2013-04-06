@@ -12,7 +12,7 @@ Glitter also supports the concepts of release channels, which makes it possible 
 1.  Install the gem.
 
     ```sh
-    $ gem install glitter --pre
+    $ gem install glitter
     ```
 
 2. Publish your app to the web.
@@ -64,6 +64,10 @@ foreman run bundle exec rspec
 ```
 
 Pretty sweet eh? That's it!
+
+# Upgrading from Glitter 1.x?
+
+Glitter 2.0 is not backwards compatible with Glitter 1.x. To migrate from 1.x you'll need to specify a release channel like `my-app-production`, note the URL of the binary asset here, and manually change the 1.0 appcast.xml entry to point to the new Glitter 2.0 release channel.
 
 # License
 

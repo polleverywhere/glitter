@@ -22,7 +22,7 @@ Glitter also supports the concepts of release channels, which makes it possible 
         AWS_SECRET_ACCESS_KEY=access_key_id \
         AWS_BUCKET_NAME=my-app-bucket \
         glitter push my-app.dmg -v 1.2.5 -c "mac-edge" \
-        -m 'Added some really cool stuff to the mix!'
+        -n 'Added some really cool stuff to the mix!'
     
     Pushing app my-app.dmg to https://s3.amazonaws.com/mac-edge/1.2.5/my-app.dmg
     Updated head https://s3.amazonaws.com/mac-edge/my-app.dmg to https://s3.amazonaws.com/mac-edge/1.2.5/my-app.dmg

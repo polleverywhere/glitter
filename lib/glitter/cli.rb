@@ -8,10 +8,17 @@ module Glitter
     method_option :channel, :type => :string, :aliases => "-c", :required => true
     method_option :notes,   :type => :string, :aliases => "-n"
     method_option :force,   :type => :boolean, :aliases => "-f"
-    def push(executable_path)
+    def push(executable_path, *asset_paths)
       release = Release::Sparkle.new(channel, options.version)
       release.notes       = options.notes
       release.executable  = File.open executable_path
+      # For more complex releases, additional assets may need to go out with the build.
+      asset_paths.each do |path|
+        release.assets[File.basename(path)].tap do |asset|
+          asset.content = File.open path
+          asset.content_type = 'application/octet-stream'
+        end
+      end
       release.push(:force => options.force).head
     end
 

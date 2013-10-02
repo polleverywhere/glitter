@@ -38,6 +38,23 @@ Glitter also supports the concepts of release channels, which makes it possible 
     
     Now send your users to mydomain.com/my-app.zip and they'll get the latest version of your app. I don't recommend using a CNAME with your application because it won't work with Amazon's HTTPS servers and you'll have to jump through some hoops to sign your app distributions with a DSA signature. Not worth it in my opinion.
 
+## Publishing multiple assets
+
+More complex installers may need to push more than one asset up to the web. For example, a .NET application will have a setup.exe installer that runs either a 64-bit or 32-bit MSI installer. To that, provide multiple paths to the CLI. *The first asset will be interpolated into the appcast.xml file*, so make sure its your setup file. Everything else will simply tag along for the ride.
+
+    ```sh
+    $ AWS_ACCESS_KEY_ID=secret_access_key \
+        AWS_SECRET_ACCESS_KEY=access_key_id \
+        AWS_BUCKET_NAME=my-app-bucket \
+        glitter push my-app.exe my-app-64-bit.msi my-app-32-bit.msi -v 1.2.5 -c "mac-edge" \
+        -n 'Added some really cool stuff to the mix!'
+    
+    Pushing app my-app.dmg to https://s3.amazonaws.com/mac-edge/1.2.5/my-app.dmg
+    Updated head https://s3.amazonaws.com/mac-edge/my-app.dmg to https://s3.amazonaws.com/mac-edge/1.2.5/my-app.dmg
+    ```
+
+Remember, you'll only want one main installation or package file per channel. If you need multiple installers or packages, consider setting up different channels.
+
 # Contribute
 
 Want to hack on glitter? Awesome! You'll need to setup an S3 bucket and run specs with the `AWS_URL` env var specified:

@@ -46,11 +46,12 @@ More complex installers may need to push more than one asset up to the web. For 
 $ AWS_ACCESS_KEY_ID=secret_access_key \
     AWS_SECRET_ACCESS_KEY=access_key_id \
     AWS_BUCKET_NAME=my-app-bucket \
-    glitter push my-app.exe my-app-64-bit.msi my-app-32-bit.msi -v 1.2.5 -c "mac-edge" \
+    glitter push my-app.exe my-app-64-bit.msi my-app-32-bit.msi -v 1.2.5 -c "win-edge" \
     -n 'Added some really cool stuff to the mix!'
 
-Pushing app my-app.dmg to https://s3.amazonaws.com/mac-edge/1.2.5/my-app.dmg
-Updated head https://s3.amazonaws.com/mac-edge/my-app.dmg to https://s3.amazonaws.com/mac-edge/1.2.5/my-app.dmg
+Pushing app my-app.dmg to https://s3.amazonaws.com/win-edge/1.2.5/my-app.dmg
+Updated head https://s3.amazonaws.com/win-edge/my-app.exe to https://s3.amazonaws.com/win-edge/1.2.5/my-app.exe
+# ...
 ```
 
 Remember, you'll only want one main installation or package file per channel. If you need multiple installers or packages, consider setting up different channels.

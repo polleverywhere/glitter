@@ -69,8 +69,8 @@ module Glitter
     # A release consists of a binary asset, notes, a monotonically increasing version number, and
     # lives inside of a channel.
     class Sparkle < Base
-      attr_accessor :notes, :executable, :filename, :bundle_version
-      attr_writer   :published_at
+      attr_accessor :notes, :executable, :filename
+      attr_writer   :published_at, :bundle_version
 
       # Yeah, lets publish this shiz NOW.
       def published_at
@@ -83,6 +83,10 @@ module Glitter
         appcast_asset
         executable_asset
         super(*args)
+      end
+
+      def bundle_version
+        @bundle_version || @version
       end
 
     private

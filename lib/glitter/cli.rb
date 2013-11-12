@@ -11,6 +11,7 @@ module Glitter
     method_option :bundle_version,  :type => :string, :aliases => "-b"
     def push(executable_path, *asset_paths)
       release = Release::Sparkle.new(channel, options.version)
+      release.bundle_version = options.bundle_version
       release.notes       = options.notes
       release.executable  = File.open executable_path
       # For more complex releases, additional assets may need to go out with the build.

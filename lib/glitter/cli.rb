@@ -4,12 +4,14 @@ module Glitter
   # Command line interface for cutting glitter builds
   class CLI < Thor
     desc "push", "pushes a build to a channel with release notes."
-    method_option :version, :type => :string, :aliases => "-v", :required => true
-    method_option :channel, :type => :string, :aliases => "-c", :required => true
-    method_option :notes,   :type => :string, :aliases => "-n"
-    method_option :force,   :type => :boolean, :aliases => "-f"
+    method_option :version,         :type => :string, :aliases => "-v", :required => true
+    method_option :channel,         :type => :string, :aliases => "-c", :required => true
+    method_option :notes,           :type => :string, :aliases => "-n"
+    method_option :force,           :type => :boolean, :aliases => "-f"
+    method_option :bundle_version,  :type => :string, :aliases => "-b"
     def push(executable_path, *asset_paths)
       release = Release::Sparkle.new(channel, options.version)
+      release.bundle_version = options.bundle_version
       release.notes       = options.notes
       release.executable  = File.open executable_path
       # For more complex releases, additional assets may need to go out with the build.

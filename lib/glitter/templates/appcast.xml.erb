@@ -14,7 +14,7 @@
         ]]>
       </description>
       <pubDate><%= published_at.strftime("%a, %d %b %Y %H:%M:%S %z") %></pubDate>
-      <enclosure url="<%= executable_asset.url %>" sparkle:version="<%= version %>" sparkle:shortVersionString="<%= version %>" length="<%= FileTest.size executable.path %>" type="application/octet-stream" />
+      <enclosure url="<%= executable_asset.url %>" sparkle:version="<%= bundle_version %>" sparkle:shortVersionString="<%= version %>" length="<%= FileTest.size executable.path %>" type="application/octet-stream" />
     </item>
   </channel>
 </rss>

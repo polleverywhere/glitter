@@ -9,8 +9,10 @@ module Glitter
     method_option :notes,           :type => :string, :aliases => "-n"
     method_option :force,           :type => :boolean, :aliases => "-f"
     method_option :bundle_version,  :type => :string, :aliases => "-b"
+    method_option :minimum_system_version, :type => :string, :aliases => "-m"
     def push(executable_path, *asset_paths)
       release = Release::Sparkle.new(channel, options.version)
+      release.minimum_system_version = options.minimum_system_version
       release.bundle_version = options.bundle_version
       release.notes       = options.notes
       release.executable  = File.open executable_path

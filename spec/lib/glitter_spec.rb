@@ -10,6 +10,7 @@ describe Glitter do
     Glitter::Release::Sparkle.new server.channel('test-channel'), "1.1.2-#{rand}" do |r|
       r.executable = File.open(__FILE__)
       r.notes = %[Did you know that its #{Time.now}? Wait, you can only answer yes to that question.]
+      r.minimum_system_version = Time.now
     end.push.head
   end
 

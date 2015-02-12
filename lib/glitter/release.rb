@@ -70,7 +70,7 @@ module Glitter
     # lives inside of a channel.
     class Sparkle < Base
       attr_accessor :notes, :executable, :filename
-      attr_writer   :published_at, :bundle_version
+      attr_writer   :published_at, :bundle_version, :minimum_system_version
 
       # Yeah, lets publish this shiz NOW.
       def published_at
@@ -87,6 +87,12 @@ module Glitter
 
       def bundle_version
         @bundle_version || @version
+      end
+
+      def minimum_version_attribute
+        unless @minimum_system_version.nil?
+          "<sparkle:minimumSystemVersion>#{@minimum_system_version}</sparkle:minimumSystemVersion>"
+        end
       end
 
     private

@@ -23,7 +23,7 @@ module Glitter
     # respective released versions.
     def channel_versions
       bucket.objects.inject Hash.new { |h,k| h[k] = Set.new } do |hash, object|
-        channel, version, _ = Release.object_segments(URI(object.url).path)
+        channel, version, _ = Release.object_segments(object.key)
         hash[channel].add(version) if channel and version
         hash
       end

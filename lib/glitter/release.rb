@@ -5,7 +5,7 @@ module Glitter
   module Release
     # Break apart an S3 bucket key by /:channel/:version/:object-key
     def self.object_segments(key)
-      if match = key.match(/\/?(.+)\/(.+)\/(.+)/)
+      if match = key.match(/\/?(.+?)\/(.+?)\/(.+)/)
         match.captures
       end
     end

@@ -12,4 +12,18 @@ describe Glitter do
       r.notes = %[Did you know that its #{Time.now}? Wait, you can only answer yes to that question.]
     end.push.head
   end
+
+  it "AWS path segments are parsed correctly for an item at top level of version folder" do
+    channel, version, key = Glitter::Release.object_segments("/channel/version/some-item")
+    expect(channel).to eq("channel")
+    expect(version).to eq("version")
+    expect(key).to eq("some-item")
+  end
+
+  it "AWS path segments are parsed correctly for an item in subfolder of version folder" do
+    channel, version, key = Glitter::Release.object_segments("/channel/version/some-dir/some-item")
+    expect(channel).to eq("channel")
+    expect(version).to eq("version")
+    expect(key).to eq("some-dir/some-item")
+  end
 end

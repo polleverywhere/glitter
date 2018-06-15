@@ -6,6 +6,7 @@ describe Glitter do
     Glitter::Server.new
   end
 
+  # Note that running this spec *will* upload a single file to your S3 bucket
   it "should release to channel" do
     Glitter::Release::Sparkle.new server.channel('test-channel'), "1.1.2-#{rand}" do |r|
       r.executable = File.open(__FILE__)

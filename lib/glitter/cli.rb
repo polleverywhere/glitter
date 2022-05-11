@@ -7,9 +7,10 @@ module Glitter
     method_option :version,                 :type => :string, :aliases => "-v", :required => true
     method_option :channel,                 :type => :string, :aliases => "-c", :required => true
     method_option :notes,                   :type => :string, :aliases => "-n"
-    method_option :force,                   :type => :boolean, :aliases => "-f"
     method_option :bundle_version,          :type => :string, :aliases => "-b"
     method_option :minimum_system_version,  :type => :string, :aliases => "-m"
+    method_option :force,                   :type => :boolean, :aliases => "-f"
+    method_option :timeout,                 :type => :numeric, :aliases => "-t", :default => Server::DEFAULT_S3_TIMEOUT
     def push(executable_path, *asset_paths)
       release = Release::Sparkle.new(channel, options.version)
       release.minimum_system_version = options.minimum_system_version
@@ -52,7 +53,7 @@ module Glitter
     end
 
     def server
-      @server ||= Server.new
+      @server ||= Server.new(timeout: options.timeout)
     end
   end
 end

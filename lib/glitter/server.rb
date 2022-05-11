@@ -5,10 +5,15 @@ require 'uri'
 # contain multiple releases of software.
 module Glitter
   class Server
-    attr_reader :access_key_id, :secret_access_key, :bucket_name
+    attr_reader :access_key_id, :secret_access_key, :bucket_name, :timeout
 
-    def initialize(access_key_id = ENV['AWS_ACCESS_KEY_ID'], secret_access_key = ENV['AWS_SECRET_ACCESS_KEY'], bucket_name = ENV['AWS_BUCKET_NAME'])
-      @access_key_id, @secret_access_key, @bucket_name = access_key_id, secret_access_key, bucket_name
+    DEFAULT_S3_TIMEOUT = 60
+
+    def initialize(access_key_id = ENV['AWS_ACCESS_KEY_ID'], secret_access_key = ENV['AWS_SECRET_ACCESS_KEY'], bucket_name = ENV['AWS_BUCKET_NAME'], timeout: DEFAULT_S3_TIMEOUT)
+      @access_key_id = access_key_id
+      @secret_access_key = secret_access_key
+      @bucket_name = bucket_name
+      @timeout = timeout
     end
 
     def channel(name)
@@ -35,7 +40,7 @@ module Glitter
     end
 
     def s3
-      @s3 ||= ::S3::Service.new(:access_key_id => access_key_id, :secret_access_key => secret_access_key, :use_ssl => true)
+      @s3 ||= ::S3::Service.new(access_key_id: access_key_id, secret_access_key: secret_access_key, timeout: timeout, use_ssl: true)
     end
   end
 end

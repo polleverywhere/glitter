@@ -11,11 +11,13 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/polleverywhere/glitter"
   s.summary     = %q{Publish Mac software updates with the Sparkle framework and Amazon S3.}
   s.description = %q{Glitter makes it easy to publish software updates via the Sparkle framework by using S3 buckets.}
+  s.licenses    = ['MIT']
 
   s.rubyforge_project = "glitter"
-  s.add_dependency "s3"
-  s.add_dependency "haml"
-  s.add_dependency "thor"
+  s.required_ruby_version = ">= 2.0.0"
+  s.add_dependency "s3", "~> 0.3"
+  s.add_dependency "haml", "~> 3.0"
+  s.add_dependency "thor", "~> 1.0"
   
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

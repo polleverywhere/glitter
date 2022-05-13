@@ -13,10 +13,9 @@ Gem::Specification.new do |s|
   s.description = %q{Glitter makes it easy to publish software updates via the Sparkle framework by using S3 buckets.}
   s.licenses    = ['MIT']
 
-  s.rubyforge_project = "glitter"
   s.required_ruby_version = ">= 2.0.0"
   s.add_dependency "s3", "~> 0.3"
-  s.add_dependency "haml", "~> 3.0"
+  s.add_dependency "haml", "~> 5.0"
   s.add_dependency "thor", "~> 1.0"
   
   s.files         = `git ls-files`.split("\n")

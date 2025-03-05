@@ -11,12 +11,14 @@ module Glitter
     method_option :minimum_system_version,  :type => :string, :aliases => "-m"
     method_option :force,                   :type => :boolean, :aliases => "-f"
     method_option :timeout,                 :type => :numeric, :aliases => "-t", :default => Server::DEFAULT_S3_TIMEOUT
+    method_option :appcast_filename,        :type => :string, :aliases => "-a", :default => "appcast.xml"
     def push(executable_path, *asset_paths)
       release = Release::Sparkle.new(channel, options.version)
       release.minimum_system_version = options.minimum_system_version
       release.bundle_version = options.bundle_version
       release.notes       = options.notes
       release.executable  = File.open executable_path
+      release.appcast_filename = options.appcast_filename if options.appcast_filename
       # For more complex releases, additional assets may need to go out with the build.
       asset_paths.each do |path|
         release.assets[File.basename(path)].tap do |asset|

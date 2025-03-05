@@ -16,6 +16,7 @@ module Glitter
       # Initialize a release and yield the block for configuration.
       def initialize(channel, version, logger = Logger.new($stdout), &block)
         @channel, @version, @logger = channel, version, logger
+        @appcast_filename = 'appcast.xml'
         block.call self if block_given?
         self
       end
@@ -69,7 +70,7 @@ module Glitter
     # A release consists of a binary asset, notes, a monotonically increasing version number, and
     # lives inside of a channel.
     class Sparkle < Base
-      attr_accessor :notes, :executable, :filename
+      attr_accessor :notes, :executable, :filename, :appcast_filename
       attr_writer   :published_at, :bundle_version, :minimum_system_version
 
       # Yeah, lets publish this shiz NOW.
@@ -106,7 +107,7 @@ module Glitter
 
       # Generates the XML appcast file needed to publish zie document
       def appcast_asset
-        assets['appcast.xml'].tap do |a|
+        assets[appcast_filename].tap do |a|
           a.content = render_template 'appcast.xml.erb'
           a.content_type = 'application/xml'
         end
